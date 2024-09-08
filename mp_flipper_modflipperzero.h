@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #define MP_FLIPPER_LED_RED (1 << 0)
 #define MP_FLIPPER_LED_GREEN (1 << 1)
@@ -242,6 +243,16 @@ void mp_flipper_pwm_stop(uint8_t raw_pin);
 bool mp_flipper_pwm_is_running(uint8_t raw_pin);
 
 #define MP_FLIPPER_INFRARED_RX_DEFAULT_TIMEOUT (1000000)
-#define MP_FLIPPER_INFRARED_RX_BUFFER_SIZE (1024)
+#define MP_FLIPPER_INFRARED_TX_DEFAULT_FREQUENCY (38000)
+#define MP_FLIPPER_INFRARED_TX_DEFAULT_DUTY_CYCLE (0.33)
+
+typedef uint32_t (*mp_flipper_infrared_signal_tx_provider)(void* signal, const size_t index);
 
 uint32_t* mp_flipper_infrared_receive(uint32_t timeout, size_t* length);
+bool mp_flipper_infrared_transmit(
+    void* signal,
+    size_t length,
+    mp_flipper_infrared_signal_tx_provider callback,
+    uint32_t repeat,
+    uint32_t frequency,
+    float duty);
