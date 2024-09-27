@@ -14,6 +14,7 @@ rm -rf ${TARGET}/*
 
 cp *.c *.h ${TARGET}
 cp -r ./extmod ./genhdr ./py ./shared ${TARGET}
+rm ${TARGET}/mp_flipper_config*.h
 
 cd ${TARGET}
 

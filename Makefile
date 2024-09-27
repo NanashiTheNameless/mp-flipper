@@ -7,7 +7,7 @@ SRC_C = ./mp_flipper_modflipperzero.c
 
 SRC_QSTR += ./mp_flipper_modflipperzero.c
 
-MICROPY_ROM_TEXT_COMPRESSION = 0
+MICROPY_ROM_TEXT_COMPRESSION ?= 0
 
 include ./Makefile.micropython
 
