@@ -3,9 +3,9 @@ MICROPYTHON_TOP = ./lib/micropython
 
 PACKAGE_DIR = ./build
 
-SRC_C = ./mp_flipper_modflipperzero.c
+SRC_C = ./mp_flipper_modflipperzero.c ./mp_flipper_fileio.c
 
-SRC_QSTR += ./mp_flipper_modflipperzero.c
+SRC_QSTR += ./mp_flipper_modflipperzero.c ./mp_flipper_fileio.c
 
 MICROPY_ROM_TEXT_COMPRESSION ?= 0
 
@@ -31,6 +31,9 @@ _build: $(PACKAGE_DIR)
 
 .PHONY: build-firmware
 build-firmware: clear _init-firmware _build
+
+.PHONY: build-fap
+build-fap: clear _init-fap _build
 
 .PHONY: clear
 clear: clean
