@@ -42,6 +42,12 @@ mp_obj_t mp_builtin_open(size_t n_args, const mp_obj_t* args, mp_map_t* kwargs) 
                 continue;
             }
 
+            if(i == 1 && mode[i] == 't') {
+                is_text = true;
+
+                continue;
+            }
+
             if(i >= 1 && mode[i] == '+') {
                 access_mode = MP_FLIPPER_FILE_ACCESS_MODE_READ | MP_FLIPPER_FILE_ACCESS_MODE_WRITE;
                 open_mode = MP_FLIPPER_FILE_OPEN_MODE_OPEN_APPEND;
@@ -53,10 +59,8 @@ mp_obj_t mp_builtin_open(size_t n_args, const mp_obj_t* args, mp_map_t* kwargs) 
         }
     }
 
-    size_t offset;
-
-    void* handle = mp_flipper_file_open(file_name, access_mode, open_mode, &offset);
-    void* fd = mp_flipper_file_new_file_descriptor(handle, offset, access_mode, open_mode, is_text);
+    void* handle = mp_flipper_file_open(file_name, access_mode, open_mode);
+    void* fd = mp_flipper_file_new_file_descriptor(handle, file_name, access_mode, open_mode, is_text);
 
     return MP_OBJ_FROM_PTR(fd);
 }
