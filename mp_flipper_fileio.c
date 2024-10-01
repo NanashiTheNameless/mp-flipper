@@ -113,6 +113,13 @@ static mp_obj_t mp_flipper_fileio_name(mp_obj_t self) {
 }
 static MP_DEFINE_CONST_FUN_OBJ_1(mp_flipper_fileio_name_obj, mp_flipper_fileio_name);
 
+static mp_obj_t mp_flipper_fileio_readable(mp_obj_t self) {
+    mp_flipper_fileio_file_descriptor_t* fd = MP_OBJ_TO_PTR(self);
+
+    return (fd->access_mode & MP_FLIPPER_FILE_ACCESS_MODE_READ) ? mp_const_true : mp_const_false;
+}
+static MP_DEFINE_CONST_FUN_OBJ_1(mp_flipper_fileio_readable_obj, mp_flipper_fileio_readable);
+
 static mp_obj_t mp_flipper_fileio_writable(mp_obj_t self) {
     mp_flipper_fileio_file_descriptor_t* fd = MP_OBJ_TO_PTR(self);
 
@@ -123,9 +130,9 @@ static MP_DEFINE_CONST_FUN_OBJ_1(mp_flipper_fileio_writable_obj, mp_flipper_file
 static const mp_map_elem_t mp_flipper_file_locals_dict_table[] = {
     {MP_OBJ_NEW_QSTR(MP_QSTR_name), MP_ROM_PTR(&mp_flipper_fileio_name_obj)},
     {MP_ROM_QSTR(MP_QSTR_read), MP_ROM_PTR(&mp_stream_read_obj)},
-    {MP_ROM_QSTR(MP_QSTR_readinto), MP_ROM_PTR(&mp_stream_readinto_obj)},
     {MP_ROM_QSTR(MP_QSTR_readline), MP_ROM_PTR(&mp_stream_unbuffered_readline_obj)},
     {MP_ROM_QSTR(MP_QSTR_readlines), MP_ROM_PTR(&mp_stream_unbuffered_readlines_obj)},
+    {MP_OBJ_NEW_QSTR(MP_QSTR_readable), MP_ROM_PTR(&mp_flipper_fileio_readable_obj)},
     {MP_OBJ_NEW_QSTR(MP_QSTR_writable), MP_ROM_PTR(&mp_flipper_fileio_writable_obj)},
     {MP_ROM_QSTR(MP_QSTR_write), MP_ROM_PTR(&mp_stream_write_obj)},
     {MP_ROM_QSTR(MP_QSTR_flush), MP_ROM_PTR(&mp_stream_flush_obj)},
@@ -169,3 +176,76 @@ MP_DEFINE_CONST_OBJ_TYPE(
     &mp_flipper_textio_stream_p,
     locals_dict,
     &mp_flipper_file_locals_dict);
+
+mp_obj_t mp_flipper_builtin_open(size_t n_args, const mp_obj_t* args, mp_map_t* kwargs) {
+    const char* file_name = mp_obj_str_get_str(args[0]);
+
+    uint8_t access_mode = MP_FLIPPER_FILE_ACCESS_MODE_READ;
+    uint8_t open_mode = MP_FLIPPER_FILE_OPEN_MODE_OPEN_EXIST;
+    bool is_text = true;
+
+    if(n_args > 1) {
+        size_t len;
+
+        const char* mode = mp_obj_str_get_data(args[1], &len);
+
+        for(size_t i = 0; i < len; i++) {
+            if(i == 0 && mode[i] == 'r') {
+                access_mode = MP_FLIPPER_FILE_ACCESS_MODE_READ;
+                open_mode = MP_FLIPPER_FILE_OPEN_MODE_OPEN_EXIST;
+
+                continue;
+            }
+
+            if(i == 0 && mode[i] == 'w') {
+                access_mode = MP_FLIPPER_FILE_ACCESS_MODE_WRITE;
+                open_mode = MP_FLIPPER_FILE_OPEN_MODE_CREATE_ALWAYS;
+
+                continue;
+            }
+
+            if(i == 1 && mode[i] == 'b') {
+                is_text = false;
+
+                continue;
+            }
+
+            if(i == 1 && mode[i] == 't') {
+                is_text = true;
+
+                continue;
+            }
+
+            if(i >= 1 && mode[i] == '+') {
+                access_mode = MP_FLIPPER_FILE_ACCESS_MODE_READ | MP_FLIPPER_FILE_ACCESS_MODE_WRITE;
+                open_mode = MP_FLIPPER_FILE_OPEN_MODE_OPEN_APPEND;
+
+                continue;
+            }
+
+            mp_raise_OSError(MP_EINVAL);
+        }
+    }
+
+    void* handle = mp_flipper_file_open(file_name, access_mode, open_mode);
+    void* fd = mp_flipper_file_new_file_descriptor(handle, file_name, access_mode, open_mode, is_text);
+
+    return MP_OBJ_FROM_PTR(fd);
+}
+MP_DEFINE_CONST_FUN_OBJ_KW(mp_flipper_builtin_open_obj, 1, mp_flipper_builtin_open);
+
+static const mp_rom_map_elem_t mp_module_io_globals_table[] = {
+    {MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_io)},
+    {MP_ROM_QSTR(MP_QSTR_open), MP_ROM_PTR(&mp_flipper_builtin_open_obj)},
+    {MP_ROM_QSTR(MP_QSTR_FileIO), MP_ROM_PTR(&mp_flipper_fileio_type)},
+    {MP_ROM_QSTR(MP_QSTR_TextIO), MP_ROM_PTR(&mp_flipper_textio_type)},
+};
+
+static MP_DEFINE_CONST_DICT(mp_module_io_globals, mp_module_io_globals_table);
+
+const mp_obj_module_t mp_module_io = {
+    .base = {&mp_type_module},
+    .globals = (mp_obj_dict_t*)&mp_module_io_globals,
+};
+
+MP_REGISTER_EXTENSIBLE_MODULE(MP_QSTR_io, mp_module_io);
