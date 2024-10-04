@@ -3,9 +3,9 @@ MICROPYTHON_TOP = ./lib/micropython
 
 PACKAGE_DIR = ./build
 
-SRC_C = ./mp_flipper_modflipperzero.c ./mp_flipper_fileio.c
+SRC_C = ./mp_flipper_modflipperzero.c ./mp_flipper_fileio.c ./mp_flipper_logging.c
 
-SRC_QSTR += ./mp_flipper_modflipperzero.c ./mp_flipper_fileio.c
+SRC_QSTR += ./mp_flipper_modflipperzero.c ./mp_flipper_fileio.c ./mp_flipper_logging.c
 
 MICROPY_ROM_TEXT_COMPRESSION ?= 0
 
