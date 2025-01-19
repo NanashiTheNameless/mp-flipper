@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Examples &#8212; uPython 1.6.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=cfbabd6b"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Roadmap" href="roadmap.html" />
+    <link rel="prev" title="Features" href="features.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h1>
+<p>This page contains a few examples.
+See more on <a class="reference external" href="https://github.com/ofabel/mp-flipper/tree/master/examples">GitHub</a>.</p>
+<section id="speaker">
+<h2>Speaker<a class="headerlink" href="#speaker" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">flipperzero</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">play_frequency</span><span class="p">(</span><span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+  <span class="n">volume</span> <span class="o">=</span> <span class="mf">0.8</span>
+
+  <span class="n">flipperzero</span><span class="o">.</span><span class="n">speaker_start</span><span class="p">(</span><span class="n">frequency</span><span class="p">,</span> <span class="n">volume</span><span class="p">)</span>
+
+  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">):</span>
+    <span class="n">volume</span> <span class="o">*=</span> <span class="mf">0.9945679</span>
+
+    <span class="n">flipperzero</span><span class="o">.</span><span class="n">speaker_set_volume</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="n">flipperzero</span><span class="o">.</span><span class="n">speaker_stop</span><span class="p">()</span>
+
+<span class="n">play_frequency</span><span class="p">(</span><span class="mf">100.0</span><span class="p">)</span>
+<span class="n">play_frequency</span><span class="p">(</span><span class="mf">200.0</span><span class="p">)</span>
+<span class="n">play_frequency</span><span class="p">(</span><span class="mf">300.0</span><span class="p">)</span>
+<span class="n">play_frequency</span><span class="p">(</span><span class="mf">500.0</span><span class="p">)</span>
+<span class="n">play_frequency</span><span class="p">(</span><span class="mf">800.0</span><span class="p">)</span>
+<span class="n">play_frequency</span><span class="p">(</span><span class="mf">1300.0</span><span class="p">)</span>
+<span class="n">play_frequency</span><span class="p">(</span><span class="mf">2100.0</span><span class="p">)</span>
+<span class="n">play_frequency</span><span class="p">(</span><span class="mf">3400.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For details, see the <a class="reference internal" href="reference.html#reference-speaker"><span class="std std-ref">Speaker</span></a> section on the <a class="reference internal" href="reference.html"><span class="doc">Reference</span></a> page.</p>
+</section>
+<section id="input">
+<h2>Input<a class="headerlink" href="#input" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">flipperzero</span>
+
+<span class="nd">@flipperzero</span><span class="o">.</span><span class="n">on_input</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on_input</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+  <span class="n">flipperzero</span><span class="o">.</span><span class="n">canvas_clear</span><span class="p">()</span>
+  <span class="n">flipperzero</span><span class="o">.</span><span class="n">canvas_set_color</span><span class="p">(</span><span class="n">flipperzero</span><span class="o">.</span><span class="n">CANVAS_BLACK</span><span class="p">)</span>
+  <span class="n">flipperzero</span><span class="o">.</span><span class="n">canvas_set_text</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{button}</span><span class="s1"> - </span><span class="si">{type}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">button</span><span class="o">=</span><span class="n">button</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">))</span>
+  <span class="n">flipperzero</span><span class="o">.</span><span class="n">canvas_update</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">):</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For details, see the <a class="reference internal" href="reference.html#reference-input"><span class="std std-ref">Input</span></a> section on the <a class="reference internal" href="reference.html"><span class="doc">Reference</span></a> page.</p>
+</section>
+<section id="interrupts">
+<h2>Interrupts<a class="headerlink" href="#interrupts" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">flipperzero</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">f0</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># init pins</span>
+<span class="n">f0</span><span class="o">.</span><span class="n">gpio_init_pin</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PA7</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_MODE_OUTPUT_PUSH_PULL</span><span class="p">)</span>
+<span class="n">f0</span><span class="o">.</span><span class="n">gpio_init_pin</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PC0</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_MODE_INTERRUPT_RISE</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PULL_UP</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_SPEED_VERY_HIGH</span><span class="p">)</span>
+<span class="n">f0</span><span class="o">.</span><span class="n">gpio_init_pin</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PC1</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_MODE_INTERRUPT_RISE</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PULL_UP</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_SPEED_VERY_HIGH</span><span class="p">)</span>
+
+<span class="nd">@f0</span><span class="o">.</span><span class="n">on_gpio</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on_gpio</span><span class="p">(</span><span class="n">pin</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">pin</span> <span class="o">==</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PC0</span><span class="p">:</span>
+    <span class="n">f0</span><span class="o">.</span><span class="n">gpio_set_pin</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PA7</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">pin</span> <span class="o">==</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PC1</span><span class="p">:</span>
+    <span class="n">f0</span><span class="o">.</span><span class="n">gpio_set_pin</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PA7</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1500</span><span class="p">):</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># reset pins</span>
+<span class="n">f0</span><span class="o">.</span><span class="n">gpio_init_pin</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PA7</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_MODE_ANALOG</span><span class="p">)</span>
+<span class="n">f0</span><span class="o">.</span><span class="n">gpio_init_pin</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PC0</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_MODE_ANALOG</span><span class="p">)</span>
+<span class="n">f0</span><span class="o">.</span><span class="n">gpio_init_pin</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PC1</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_MODE_ANALOG</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example drives an external LED upon interrupts: A rising edge on <code class="docutils literal notranslate"><span class="pre">C0</span></code> sets the pin <code class="docutils literal notranslate"><span class="pre">A7</span></code> to high, a rising edge on <code class="docutils literal notranslate"><span class="pre">C1</span></code> sets the pin <code class="docutils literal notranslate"><span class="pre">A7</span></code> to low.
+The following schematic circuit diagram shows the hardware setup for this example:</p>
+<figure class="align-default" id="id1">
+<img alt="_images/gpio_interrupt_circuit.svg" src="_images/gpio_interrupt_circuit.svg" style="width: 90%;" />
+<figcaption>
+<p><span class="caption-text">Hardware setup for the GPIO interrupt example.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>For details, see the <a class="reference internal" href="reference.html#reference-gpio"><span class="std std-ref">GPIO</span></a> section on the <a class="reference internal" href="reference.html"><span class="doc">Reference</span></a> page.</p>
+</section>
+<section id="adc">
+<h2>ADC<a class="headerlink" href="#adc" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">flipperzero</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">f0</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">f0</span><span class="o">.</span><span class="n">gpio_init_pin</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PC1</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">GPIO_MODE_ANALOG</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">):</span>
+  <span class="n">raw_value</span> <span class="o">=</span> <span class="n">f0</span><span class="o">.</span><span class="n">adc_read_pin_value</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PC1</span><span class="p">)</span>
+  <span class="n">raw_voltage</span> <span class="o">=</span> <span class="n">f0</span><span class="o">.</span><span class="n">adc_read_pin_voltage</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PC1</span><span class="p">)</span>
+  
+  <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{value}</span><span class="s1"> #&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">raw_value</span><span class="p">)</span>
+  <span class="n">voltage</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{value}</span><span class="s1"> mV&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">raw_voltage</span><span class="p">)</span>
+
+  <span class="n">f0</span><span class="o">.</span><span class="n">canvas_clear</span><span class="p">()</span>
+
+  <span class="n">f0</span><span class="o">.</span><span class="n">canvas_set_text</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+  <span class="n">f0</span><span class="o">.</span><span class="n">canvas_set_text</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">voltage</span><span class="p">)</span>
+
+  <span class="n">f0</span><span class="o">.</span><span class="n">canvas_update</span><span class="p">()</span>
+
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example uses a voltage divider with the 3.3 V source from pin 9. The switch <code class="docutils literal notranslate"><span class="pre">S1</span></code> changes the input voltage on <code class="docutils literal notranslate"><span class="pre">C1</span></code> between 0 and about 0.8 V.</p>
+<figure class="align-default" id="id2">
+<img alt="_images/adc_circuit.svg" src="_images/adc_circuit.svg" style="width: 90%;" />
+<figcaption>
+<p><span class="caption-text">Hardware setup for the ADC example.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>For details, see the <a class="reference internal" href="reference.html#reference-adc"><span class="std std-ref">ADC</span></a> section on the <a class="reference internal" href="reference.html"><span class="doc">Reference</span></a> page.</p>
+</section>
+<section id="pwm">
+<h2>PWM<a class="headerlink" href="#pwm" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">flipperzero</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">f0</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">f0</span><span class="o">.</span><span class="n">pwm_start</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PA7</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">f0</span><span class="o">.</span><span class="n">pwm_start</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">GPIO_PIN_PA7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example drives an LED connected to pin <code class="docutils literal notranslate"><span class="pre">A7</span></code> and <code class="docutils literal notranslate"><span class="pre">GND</span></code> using a PWM signal with two different frequency and duty cycle settings.</p>
+<figure class="align-default" id="id3">
+<img alt="_images/pwm_circuit.svg" src="_images/pwm_circuit.svg" style="width: 90%;" />
+<figcaption>
+<p><span class="caption-text">Hardware setup for the PWM example.</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>For details, see the <a class="reference internal" href="reference.html#reference-pwm"><span class="std std-ref">PWM</span></a> section on the <a class="reference internal" href="reference.html"><span class="doc">Reference</span></a> page.</p>
+</section>
+<section id="infrared">
+<h2>Infrared<a class="headerlink" href="#infrared" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">flipperzero</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">f0</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># receive IR signal</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">f0</span><span class="o">.</span><span class="n">infrared_receive</span><span class="p">()</span>
+
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># transmit received signal</span>
+<span class="n">f0</span><span class="o">.</span><span class="n">infrared_transmit</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For details, see the <a class="reference internal" href="reference.html#reference-infrared"><span class="std std-ref">Infrared</span></a> section on the <a class="reference internal" href="reference.html"><span class="doc">Reference</span></a> page.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo of uPython"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">uPython</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#speaker">Speaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupts">Interrupts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adc">ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pwm">PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#infrared">Infrared</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://www.github.com/ofabel/mp-flipper">Source Code</a></li>
+    
+    <li class="toctree-l1"><a href="https://www.github.com/ofabel/mp-flipper/issues">Bugtracker</a></li>
+    
+    <li class="toctree-l1"><a href="https://lab.flipper.net/apps/upython">Releases</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="features.html" title="previous chapter">Features</a></li>
+      <li>Next: <a href="roadmap.html" title="next chapter">Roadmap</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Features &#8212; uPython 1.6.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=cfbabd6b"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="Reference" href="reference.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="features">
+<h1>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h1>
+<p>Adding Python support to the Flipper Zero platform was only possible by rigorously sorting unnecessary language features.
+So here is a detailed list of all supported and unsupported Python language features.</p>
+<section id="supported">
+<h2>Supported<a class="headerlink" href="#supported" title="Link to this heading">¶</a></h2>
+<p>The following features are enabled and supported by the interpreter:</p>
+<ul class="simple">
+<li><p>Garbage collector is enabled.</p></li>
+<li><p>Finaliser calls in the garbage collector (e.g. <code class="docutils literal notranslate"><span class="pre">__del__</span></code>).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">__file__</span></code> constant.</p></li>
+<li><p>Import of external files from the SD card.</p></li>
+<li><p>Read and write files from and to the SD card.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">time</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">random</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">logging</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">io</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">float</span></code> data type.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">%</span></code> string formatting operator.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.format</span></code> string formatting function.</p></li>
+<li><p>Support for <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator">decorator</a> functions.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">setattr</span></code> function.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">filter</span></code> function.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">reversed</span></code> function.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> function.</p></li>
+<li><p>Module-level <code class="docutils literal notranslate"><span class="pre">__init__</span></code> imports.</p></li>
+<li><p>Support for a <a class="reference external" href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a>.</p></li>
+</ul>
+</section>
+<section id="unsupported">
+<h2>Unsupported<a class="headerlink" href="#unsupported" title="Link to this heading">¶</a></h2>
+<p>The following features are disabled and <em>not</em> supported by the interpreter:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">__doc__</span></code> constants.</p></li>
+<li><p>Source code line numbers in exceptions.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">cmath</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">complex</span></code> data type.</p></li>
+<li><p>Support for multiple inheritance.</p></li>
+<li><p>Module-level <code class="docutils literal notranslate"><span class="pre">__getattr__</span></code> support according to <a class="reference external" href="https://peps.python.org/pep-0562/">PEP 562</a>.</p></li>
+<li><p>Support for the descriptors <code class="docutils literal notranslate"><span class="pre">__get__</span></code>, <code class="docutils literal notranslate"><span class="pre">__set__</span></code> and  <code class="docutils literal notranslate"><span class="pre">__delete__</span></code>.</p></li>
+<li><p>Coroutines with <code class="docutils literal notranslate"><span class="pre">async</span></code> and <code class="docutils literal notranslate"><span class="pre">await</span></code> functions.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">:=</span></code> assign expression.</p></li>
+<li><p>Non-standard <code class="docutils literal notranslate"><span class="pre">.pend_throw()</span></code> method for generators.</p></li>
+<li><p>Support for <code class="docutils literal notranslate"><span class="pre">bytes.hex</span></code> and <code class="docutils literal notranslate"><span class="pre">bytes.fromhex</span></code>.</p></li>
+<li><p>Support for unicode characters.</p></li>
+<li><p>The string functions <code class="docutils literal notranslate"><span class="pre">.center</span></code>, <code class="docutils literal notranslate"><span class="pre">.count</span></code>, <code class="docutils literal notranslate"><span class="pre">.partition</span></code>, <code class="docutils literal notranslate"><span class="pre">.rpartition</span></code> and <code class="docutils literal notranslate"><span class="pre">.splitlines</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> data type.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">memoryview</span></code> data type.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">slice</span></code> object.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">frozenset</span></code> object.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">property</span></code> decorator.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">next</span></code> function with a second argument.</p></li>
+<li><p>All special methods for user classes (e.g. <code class="docutils literal notranslate"><span class="pre">__imul__</span></code>).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">enumerate</span></code> function.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">compile</span></code> function.</p></li>
+<li><p>Support for <code class="docutils literal notranslate"><span class="pre">eval</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code> and <code class="docutils literal notranslate"><span class="pre">execfile</span></code> functions.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">NotImplemented</span></code> special constant.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">input</span></code> function.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pow</span></code> function with 3 integer arguments.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">help</span></code> function.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">micropython</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">array</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">collections</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">struct</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">gc</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">sys</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">select</span></code> module.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">json</span></code> module.</p></li>
+</ul>
+<p>This list of unsupported features is not set in stone.
+If you miss support for one particular feature, feel free to <a class="reference external" href="https://github.com/ofabel/mp-flipper/issues">open an issue</a> or make a pull request.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo of uPython"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">uPython</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#supported">Supported</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unsupported">Unsupported</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://www.github.com/ofabel/mp-flipper">Source Code</a></li>
+    
+    <li class="toctree-l1"><a href="https://www.github.com/ofabel/mp-flipper/issues">Bugtracker</a></li>
+    
+    <li class="toctree-l1"><a href="https://lab.flipper.net/apps/upython">Releases</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="reference.html" title="previous chapter">Reference</a></li>
+      <li>Next: <a href="examples.html" title="next chapter">Examples</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

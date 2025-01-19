@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Quickstart &#8212; uPython 1.6.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=cfbabd6b"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference" href="reference.html" />
+    <link rel="prev" title="MicroPython on Flipper Zero" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">¶</a></h1>
+<p>This page provides some details on how to start and use the application.</p>
+<section id="basics">
+<h2>Basics<a class="headerlink" href="#basics" title="Link to this heading">¶</a></h2>
+<p>How to install the application and run a script:</p>
+<ol class="arabic simple">
+<li><p>Install the application from the <a class="reference external" href="https://lab.flipper.net/apps/upython">Flipper Lab</a> on your Flipper device.</p></li>
+<li><p>Write some Python code or use one of the provided <a class="reference external" href="https://github.com/ofabel/mp-flipper/tree/master/examples">examples</a>.</p></li>
+<li><p>Use the <a class="reference external" href="https://flipperzero.one/update">qFlipper</a> application to upload the code to your Flipper’s SD card.</p></li>
+<li><p>Start the <strong>uPython</strong> application on your Flipper to run your Python script.</p></li>
+</ol>
+<p>Instead of running a script, you could also use the interactive MicroPython shell from the terminal.
+Visit the <a class="reference external" href="https://docs.flipper.net/development/cli">Flipper documentation</a> for details about the CLI in general.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Looking for a more efficient solution to copy your files or start a CLI session?
+Try the <a class="reference external" href="https://github.com/ofabel/fssdk">Flipper Zero Script SDK</a> helper.</p>
+</div>
+<p>In case your Flipper is not responding or a script doesn’t behave as expected and won’t finish: <a class="reference external" href="https://docs.flipper.net/basics/reboot">do a reboot</a> by pressing and holding <strong>Left</strong> and <strong>Back</strong> for 5 seconds.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<p>Due to the occasional crashes upon application start, the application is especially designed to run in the background while working on the CLI from the computer.</p>
+<p>You can use the CLI to start the application:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>loader<span class="w"> </span>open<span class="w"> </span>/ext/apps/Tools/upython.fap
+</pre></div>
+</div>
+<p>You can also use the CLI to start the application and run a Python script:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>loader<span class="w"> </span>open<span class="w"> </span>/ext/apps/Tools/upython.fap<span class="w"> </span>/ext/scripts/tic_tac_toe.py
+</pre></div>
+</div>
+<p>Once the application is up an running, it registers the <strong>py</strong> command in the Flipper’s CLI command registry.
+You can use this command to access the interactive MicroPython shell or start a script by passing the path as an argument:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>py<span class="w"> </span>/ext/scripts/tic_tac_toe.py
+</pre></div>
+</div>
+<p>Be aware, that the <strong>py</strong> command is only available as long as the application is running on the Flipper.
+Furthermore, you can only run one script at the time.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo of uPython"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">uPython</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basics">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://www.github.com/ofabel/mp-flipper">Source Code</a></li>
+    
+    <li class="toctree-l1"><a href="https://www.github.com/ofabel/mp-flipper/issues">Bugtracker</a></li>
+    
+    <li class="toctree-l1"><a href="https://lab.flipper.net/apps/upython">Releases</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">MicroPython on Flipper Zero</a></li>
+      <li>Next: <a href="reference.html" title="next chapter">Reference</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
