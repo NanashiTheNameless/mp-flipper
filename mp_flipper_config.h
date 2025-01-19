@@ -183,6 +183,7 @@ typedef long mp_off_t;
 #define MICROPY_PY_VFS (0)
 #define MICROPY_ENABLE_SCHEDULER (1)
 #define MICROPY_MODULE_BUILTIN_INIT (1)
+#define MICROPY_MODULE_ATTR_DELEGATION (1)
 
 #ifdef MP_FLIPPER_MATH
 #define MICROPY_PY_MATH (1)
